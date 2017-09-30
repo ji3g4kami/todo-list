@@ -1,4 +1,6 @@
 class TodosController < ApplicationController
+  before_action :set_todo, :only => [:show, :edit, :update, :destroy]
+  
   def index
     @todos = Todo.all
   end
@@ -14,29 +16,28 @@ class TodosController < ApplicationController
   end
 
   def show
-    @todo = Todo.find(params[:id])
   end
 
   def edit
-    @todo = Todo.find(params[:id])
   end
 
   def destroy
-    @todo = Todo.find(params[:id])
     @todo.destroy
     redirect_to todos_url
   end
 
   def update
-    @todo = Todo.find(params[:id])
+    
     @todo.update_attributes(todo_params)
     redirect_to todo_path(@todo)
   end
 
-
-
   private
   def todo_params
     params.require(:todo).permit(:name, :due_date, :note)
+  end
+
+  def set_todo
+    @todo = Todo.find(params[:id])
   end
 end
