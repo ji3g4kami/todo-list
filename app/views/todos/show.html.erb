@@ -1,5 +1,19 @@
-<%= @todo.name %>
-<%= @todo.due_date %>
-<%= @todo.note %>
+<div class="container">
+  <h1><%= @todo.name %></h1>
+  <h3>Due Date:</h3>
+  <div class="panel panel-default">
+    <div class="panel-body">
+        <%= @todo.due_date %>
+    </div>
+  </div>
+  <h3>Notes:</h3>
+  <div class="panel panel-default">
+    <div class="panel-body">
+        <%= @todo.note %>
+    </div>
+  </div>
 
-<%= link_to 'Back to index', todos_path %>
+  <%= link_to 'Back to index', todos_path, class: "btn btn-md btn-primary" %>
+  <%= link_to 'Edit', edit_todo_path(@todo), class: "btn btn-md btn-primary" %>
+  <%= link_to 'Destroy', todo_path(@todo), method: :delete, class: "btn btn-md btn-danger", data:{ confirm: "Are you sure?" } %>
+</div>
