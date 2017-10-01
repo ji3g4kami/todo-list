@@ -1,12 +1,24 @@
-<ul>
-  <% @todos.each do |todo| %>
-    <li>
-      <%= todo.name %>
-      <%= link_to 'Show', todo_path(todo) %>
-      <%= link_to 'Edit', edit_todo_path(todo) %>
-      <%= link_to 'Destroy', todo_path(todo), method: :delete, data:{ confirm: "Are you sure?" } %>
-    </li>
-  <% end %>
- </ul>
-
- <%= link_to 'ADD TODO', new_todo_path %>
+<div class="container">
+    <h1>TODO LIST</h1>
+    <table class="table table-hover table-bordered">
+      <tr>
+        <th>Task</th>
+        <th>Due Date</th>
+        <th>Notes</th>
+        <th>Actions</th>
+      </tr>
+      <% @todos.each do |todo| %>
+        <tr>
+          <td><%= link_to todo.name, todo_path(todo) %></td>
+          <td><%= todo.due_date %></td>
+          <td><%= todo.note %></td>
+          <td>
+            <%= link_to 'Edit', edit_todo_path(todo), class: "btn btn-xs btn-primary"%>
+            <%= link_to 'Destroy', todo_path(todo), method: :delete, class: "btn btn-xs btn-danger", data:{ confirm: "Are you sure?" } %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+      
+    <%= link_to "ADD TODO", new_todo_path, class: "btn btn-md btn-primary"%>
+  </div>
