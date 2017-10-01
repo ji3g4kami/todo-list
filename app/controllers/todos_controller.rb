@@ -26,9 +26,14 @@ class TodosController < ApplicationController
   end
 
   def destroy
-    flash[:danger] = "Task was successfully deleted"
-    @todo.destroy
-    redirect_to todos_url
+    if @todo[:due_date] < DateTime.now.to_date
+      flash[:danger] = "You cannot delete out dated tasks"
+      redirect_to todos_url
+    else
+      flash[:success] = "Task was successfully deleted"
+      @todo.destroy
+      redirect_to todos_url
+    end
   end
 
   def update
