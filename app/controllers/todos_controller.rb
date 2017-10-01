@@ -12,6 +12,7 @@ class TodosController < ApplicationController
   def create
     @todo = Todo.new(todo_params)
     if @todo.save
+      flash[:success] = "Task was successfully created"
       redirect_to todos_url
     else
       render :new
@@ -25,11 +26,13 @@ class TodosController < ApplicationController
   end
 
   def destroy
+    flash[:danger] = "Task was successfully deleted"
     @todo.destroy
     redirect_to todos_url
   end
 
   def update
+    flash[:success] = "Task was successfully updated"
     if @todo.update_attributes(todo_params)
       redirect_to todo_path(@todo)
     else
